@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1517153319 source:c:\users\asus ux305f\desktop\algorithm\main.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+
