@@ -5,9 +5,9 @@
 template <typename T>
 class HashTable {
   vector< LinkedList<T> > table;
-  int hashfunction (string hashitem) { // hash function
+  int hashfunction (int hashitem) { // hash function
     //return hashitem % table.size();
-    return hashitem.length() % table.size();
+    return hashitem % table.size();
   }
  public:
   HashTable (int size) {
@@ -20,15 +20,23 @@ class HashTable {
   int size() {
     return table.size();
   }
-  void insert (T newItem) {
-    int location = hashfunction (newItem);
+  void insert (T newItem,int key) {
+    int location = hashfunction (key);
     table[location].insertFront (newItem);
+    //cout << location << " , " << table[location] << endl;
   }
-  bool retrieve (T & target) {
-    int location = hashfunction (target);
+  bool retrieve (T & target,int key) {
+    int location = hashfunction (key);
     if (!table[location].find (target))
-      return false;
-    return true;
+    {
+        return false;
+    }
+    else
+    {
+       cout << location << " , " << table[location] << endl;
+       return true;
+    }
+
   }
   friend ostream& operator<< (ostream& os, HashTable<T>& ht) {
     for (int i = 0; i < ht.size(); i++)

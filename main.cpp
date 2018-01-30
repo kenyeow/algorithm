@@ -4,11 +4,14 @@
 #include <ctime>
 #include "HashTable.cpp"
 #include <chrono>
+#include <map>
 
 using namespace std;
 
 static const char alphabet[] =
 "abcdefghijklmnopqrstuvwxyz";
+
+std::map<string,int>name_map;
 
 int stringLength = sizeof(alphabet)-1;
 
@@ -76,18 +79,21 @@ void seqSearch(){ // sequential search algorithm
 
 void hashTable(string url[]){
 
-    HashTable<string> ht(94049);
+    HashTable<string> ht(65551);
     //HashTable<string> ht(65551);
 
     for (int i = 0; i < numberOfUrls; i++){
-         ht.insert(url[i]);
+         name_map[url[i]] = i+1;
+         int key = name_map[url[i]];
+         ht.insert(url[i],key);
     }
 
     string target;
     cout << "Enter the URL you'd like to search: ";
     cin >> target;
+    int key = name_map[target];
     auto start = chrono::system_clock::now();
-    if (ht.retrieve (target)){
+    if (ht.retrieve (target,key)){
          cout << "URL found\n";
     }
     else{
